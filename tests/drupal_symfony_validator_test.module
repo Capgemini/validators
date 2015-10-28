@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Test module for Drupal Symfony Validator.
+ */
+
+/**
  * Test form.
  */
 function drupal_symfony_validator_test_single_validator_form($form, &$form_state) {
