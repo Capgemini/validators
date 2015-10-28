@@ -1,0 +1,85 @@
+<?php
+
+class DSVFormTestCase extends DrupalWebTestCase {
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Form validation',
+      'description' => 'Tests various form element validation mechanisms.',
+      'group' => 'Drupal Symfony Validator',
+    );
+  }
+
+  function setUp() {
+    parent::setUp(array('drupal_symfony_validator', 'drupal_symfony_validator_test'));
+  }
+  
+  function testSingleValidator() {
+    # All valid
+    $edit = array(
+      'email' => $this->randomString() . '@drupal.org',
+      'notblank' => $this->randomString(),
+      'blank' => '',
+      'type' => $this->randomString(),
+      'length' => $this->randomString(4),
+      'url' => 'http://www.drupal.org',
+      'regex' => 'this is a match',
+      'ip' => '127.0.0.1',
+      'uuid' => '216fff40-98d9-11e3-a5e2-0800200c9a66',
+      'range' => 3,
+      'equalto' => 'valid',
+    );
+    $this->drupalPost('dsv-test/single-validator', $edit, 'Submit');
+    $this->assertNoText('This value is not a valid email address.');
+    $this->assertNoText('This value should not be blank.');
+    $this->assertNoText('This value should be blank.');
+    $this->assertNoText('This value should be of type string.');
+    $this->assertNoText('This value is too short. It should have 2 characters or more.');
+    $this->assertNoText('This value is too short. It should have 2 characters or more.');
+    $this->assertNoText('This value is not a valid URL.');
+    $this->assertNoText('This value is not valid.');
+    $this->assertNoText('This is not a valid IP address.');
+    $this->assertNoText('This is not a valid UUID.');
+    $this->assertNoText('This value should be 2 or more.');
+    $this->assertNoText('This value should be 5 or less.');
+    $this->assertNoText('This value should be a valid number.');
+    $this->assertNoText('This value should be equal to "valid".');
+
+    // Invalid test 1
+    $edit = array(
+      'email' => $this->randomString(),
+      'blank' => $this->randomString(),
+      'length' => $this->randomString(1),
+      'url' => $this->randomString(),
+      'regex' => $this->randomString(),
+      'ip' => $this->randomString(),
+      'uuid' => $this->randomString(),
+      'range' => 1,
+      'equalto' => $this->randomString(),
+    );
+    $this->drupalPost('dsv-test/single-validator', $edit, 'Submit');
+    $this->assertText('This value is not a valid email address.');
+    $this->assertText('This value should be blank.');
+    $this->assertText('This value is too short. It should have 2 characters or more.');
+    $this->assertText('This value is not a valid URL.');
+    $this->assertText('This value is not valid.');
+    $this->assertText('This is not a valid IP address');
+    $this->assertText('This is not a valid UUID.');
+    $this->assertText('This value should be 2 or more.');
+    $this->assertText('This value should be equal to "valid"');
+
+    // Invalid test 2
+    $edit['length'] = $this->randomString();
+    $edit['range'] = 6;
+    $this->drupalPost('dsv-test/single-validator', $edit, 'Submit');
+    $this->assertText('This value is too long. It should have 5 characters or less.');
+    $this->assertText('This value should be 5 or less.');
+
+    // Invalid test 3
+    $edit['range'] = $this->randomString();
+    $this->drupalPost('dsv-test/single-validator', $edit, 'Submit');
+    $this->assertText('This value should be a valid number.');
+
+  }
+
+}

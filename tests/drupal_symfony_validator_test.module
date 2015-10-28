@@ -1,0 +1,134 @@
+<?php
+
+/**
+ * Test form.
+ */
+function drupal_symfony_validator_test_single_validator_form($form, &$form_state) {
+  $form = array();
+
+  $form['email'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Email default valid'),
+    '#validators' => array(
+      'Email',
+    ),
+  );
+
+  $form['notblank'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Notblank'),
+    '#validators' => array(
+      'NotBlank',
+    ),
+  );
+
+  $form['blank'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Blank'),
+    '#validators' => array(
+      'Blank',
+    ),
+  );
+
+  $form['type'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Type'),
+    '#validators' => array(
+      'Type' => array(
+        'type' => 'string',
+      ),
+    ),
+  );
+
+  $form['length'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Length'),
+    '#validators' => array(
+      'Length' => array(
+        'min' => 2,
+        'max' => 5,
+      )
+    ),
+  );
+
+  $form['url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Url'),
+    '#validators' => array(
+      'Url',
+    ),
+  );
+
+  $form['regex'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Regex'),
+    '#validators' => array(
+      'Regex' => array(
+        'pattern' => '/match/',
+      )
+    )
+  );
+
+  $form['ip'] = array(
+    '#type' => 'textfield',
+    '#title' => t('IP'),
+    '#validators' => array(
+      'Ip',
+    )
+  );
+
+  $form['uuid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Uuid'),
+    '#validators' => array(
+      'Uuid',
+    ),
+  );
+
+  $form['range'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Range'),
+    '#validators' => array(
+      'Range' => array(
+        'min' => 2,
+        'max' => 5,
+      )
+    ),
+  );
+
+  $form['equalto'] = array(
+    '#type' => 'textfield',
+    '#title' => t('EqualTo'),
+    '#validators' => array(
+      'EqualTo' => array(
+        'value' => 'valid'
+      )
+    ),
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Submit',
+  );
+
+  // To simplify this test, enable form caching and use form storage to
+  // remember our alteration.
+  $form_state['cache'] = TRUE;
+
+  return $form;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function drupal_symfony_validator_test_menu() {
+  $items['dsv-test/single-validator'] = array(
+    'title' => 'Form single #validators validation',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('drupal_symfony_validator_test_single_validator_form'),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
