@@ -1336,12 +1336,13 @@ function drupal_symfony_validator_assert_iban($value, $options = array()) {
  * - isbn10Message: (optional) (string) (Default: 'This value is not a valid
  *   ISBN-10.') The message that will be shown if the type option is isbn10
  *   and the given value does not pass the ISBN-10 check
- * - isbn13Message: (optional) (string) (Default: 'This value is not a valid ISBN-13.')
- *   The message that will be shown if the type option is isbn13 and the given
- *   value does not pass the ISBN-13 check.
- * - bothIsbnMessage: (optional) (string) (Default: 'This value is neither a valid ISBN-10
- *   nor a valid ISBN-13.') The message that will be shown if the type option
- *   is null and the given value does not pass any of the ISBN checks.
+ * - isbn13Message: (optional) (string) (Default: 'This value is not a valid
+ *   ISBN-13.') The message that will be shown if the type option is isbn13 and
+ *   the given value does not pass the ISBN-13 check.
+ * - bothIsbnMessage: (optional) (string) (Default: 'This value is neither a
+ *   valid ISBN-10 nor a valid ISBN-13.') The message that will be shown if the
+ *   type option is null and the given value does not pass any of the ISBN
+ *   checks.
  *
  * @param string $value
  *   The value that needs to be checked.

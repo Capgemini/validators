@@ -47,7 +47,7 @@ function drupal_symfony_validator_test_single_validator_form($form, &$form_state
       'Length' => array(
         'min' => 2,
         'max' => 5,
-      )
+      ),
     ),
   );
 
@@ -65,8 +65,8 @@ function drupal_symfony_validator_test_single_validator_form($form, &$form_state
     '#validators' => array(
       'Regex' => array(
         'pattern' => '/match/',
-      )
-    )
+      ),
+    ),
   );
 
   $form['ip'] = array(
@@ -74,7 +74,7 @@ function drupal_symfony_validator_test_single_validator_form($form, &$form_state
     '#title' => t('IP'),
     '#validators' => array(
       'Ip',
-    )
+    ),
   );
 
   $form['uuid'] = array(
@@ -92,7 +92,7 @@ function drupal_symfony_validator_test_single_validator_form($form, &$form_state
       'Range' => array(
         'min' => 2,
         'max' => 5,
-      )
+      ),
     ),
   );
 
@@ -101,8 +101,8 @@ function drupal_symfony_validator_test_single_validator_form($form, &$form_state
     '#title' => t('EqualTo'),
     '#validators' => array(
       'EqualTo' => array(
-        'value' => 'valid'
-      )
+        'value' => 'valid',
+      ),
     ),
   );
 

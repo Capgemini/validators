@@ -23,7 +23,7 @@ function _drupal_symfony_validator_process_validation($value, Constraint $constr
   $violations = $validator->validate($value, $constraint);
 
   $form_errors = array();
-  for ($i = 0; $i < $violations->count(); $i++ ) {
+  for ($i = 0; $i < $violations->count(); $i++) {
     $violation = $violations->get($i);
     $form_errors[] = $violation->getMessage();
   }

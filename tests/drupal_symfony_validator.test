@@ -5,7 +5,10 @@
  * Tests for drupal_symfony_validator.module.
  */
 
-class DSVValidatorTestCase extends DrupalUnitTestCase {
+/**
+ * Unit testing class for Drupal Symfony Validator.
+ */
+class DrupalSymfonyValidatorTestFunctions extends DrupalUnitTestCase {
 
   public static function getInfo() {
     return array(
@@ -193,10 +196,6 @@ class DSVValidatorTestCase extends DrupalUnitTestCase {
       $this->assertTrue(is_numeric($key), 'When there are violations, the key of the returned array should be numeric.');
       $this->assertTrue(is_string($value), 'When there are violations, the value of each array element should be a string.');
     }
-  }
-
-  function testMultipleValidators() {
-   $form = array();
   }
 
   /**

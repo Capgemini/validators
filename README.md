@@ -48,7 +48,3 @@ function mymodule_personal_details_form($form, &$form_state) {
 
 ## Issues
 Development for this module [takes place over on Github](https://github.com/Capgemini/drupal_symfony_validator). Please raise issues over there.
-
-**Supporting organizations: **
-Capgemini
-[Capgemini](https://www.drupal.org/node/1772260) sponsored development of this module
