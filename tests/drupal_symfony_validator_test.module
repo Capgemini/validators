@@ -5,6 +5,8 @@
  * Test module for Drupal Symfony Validator.
  */
 
+module_load_include('inc', 'drupal_symfony_validator', 'drupal_symfony_validator.validator');
+
 /**
  * Test form.
  */

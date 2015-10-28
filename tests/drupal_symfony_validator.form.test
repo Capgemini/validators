@@ -43,7 +43,7 @@ class DrupalSymfonyValidatorTestForm extends DrupalWebTestCase {
     $this->assertNoText('This value should be 2 or more.');
     $this->assertNoText('This value should be 5 or less.');
     $this->assertNoText('This value should be a valid number.');
-    $this->assertNoText('This value should be equal to "valid".');
+    $this->assertNoText('This value should be equal to');
 
     // Invalid test 1
     $edit = array(
@@ -66,7 +66,7 @@ class DrupalSymfonyValidatorTestForm extends DrupalWebTestCase {
     $this->assertText('This is not a valid IP address');
     $this->assertText('This is not a valid UUID.');
     $this->assertText('This value should be 2 or more.');
-    $this->assertText('This value should be equal to "valid"');
+    $this->assertText('This value should be equal to');
 
     // Invalid test 2
     $edit['length'] = $this->randomString();
