@@ -6,6 +6,9 @@
 
 use Symfony\Component\Validator\Constraints as Assert;
 
+function drupal_symfony_validator_assert_hook($value, $constraint) {
+  return _drupal_symfony_validator_process_validation($value, $constraint);
+}
 /**
  * Assert not blank.
  *

@@ -50,8 +50,7 @@ function _drupal_symfony_validator_process_validation($value, Constraint $constr
  */
 function drupal_symfony_validator_get_violations($constraint, $value, array $options = array()) {
   module_load_include('inc', 'drupal_symfony_validator', 'drupal_symfony_validator.asserts');
-  $violations = NULL;
-  $constraint = strtolower($constraint);
+  $violations = array();
 
   $functions = array(
     'isnull' => 'is_null',
@@ -69,11 +68,27 @@ function drupal_symfony_validator_get_violations($constraint, $value, array $opt
     'cardscheme' => 'card_scheme',
   );
 
-  $assert = array_key_exists($constraint, $functions) ? $functions[$constraint] : $constraint;
+  $assert = array_key_exists(strtolower($constraint), $functions) ? $functions[strtolower($constraint)] : $constraint;
   $function = 'drupal_symfony_validator_assert_' . $assert;
 
+  // Check if drupal_symfony_validator has an assertion for the given
+  // constraint.
   if (function_exists($function)) {
     $violations = call_user_func($function, $value, $options);
+  }
+  // Check if another module is delivering an assertion for the given
+  // constraint.
+  else {
+    foreach (module_invoke_all('validator_asserts', $constraint, $options) as $custom_constraint) {
+      if (is_subclass_of($custom_constraint, 'Symfony\Component\Validator\Constraint')){
+        foreach (drupal_symfony_validator_assert_hook($value, $custom_constraint) as $custom_violation) {
+          $violations[] = $custom_violation;
+        }
+      }
+      else {
+        drupal_set_message(t('Class @class is not extending Symfony\Component\Validator\Constraint', array('@class' => get_class($custom_constraint))), 'error');
+      }
+    }
   }
 
   return $violations;

@@ -9,7 +9,7 @@ be found on the [official component page](http://symfony.com/doc/current/book/va
 PHP Version: 5.3.x or greater.
 Dependencies: [Composer Manager](https://drupal.org/project/composer_manager)
 
-## Example
+## Basic example
 In the following example we will validate if the user filled in a valid e-mail
 address and a valid [ISBN number](https://en.wikipedia.org/wiki/International_Standard_Book_Number):
 
@@ -46,5 +46,40 @@ function mymodule_personal_details_form($form, &$form_state) {
 }
 ```
 
-## Issues
-Development for this module [takes place over on Github](https://github.com/Capgemini/drupal_symfony_validator). Please raise issues over there.
+## Custom constraints
+The module allows other modules to implement the 
+`hook_validator_asserts()` hook. Implementing this hook allows other
+modules to use custom asserts. The hook has to return an empty array or an array
+containing an object that is extending `Symfony\Component\Validator\Constraint`.
+ 
+### Example of a custom contraint.
+
+```
+...
+
+function mymodule_personal_details_form($form, &$form_state) {
+
+  $form['car_brand'] = array(
+    '#type' => 'textfield',
+    '#title' => t('The car brand of your car'),
+    '#validators' => array(
+      'CarBrand'
+    ),
+  );
+
+...
+
+/**
+ * Implements hook_validator_asserts().
+ */
+function mymodule_validator_asserts($constraint, $options) {
+  $asserts = array();
+
+  switch ($constraint) {
+    case "CarBrand":
+      $asserts[] = new MyModule\Assert\CarBrand($options);
+  }
+
+  return $asserts;
+}
+```

@@ -16,7 +16,6 @@ function drupal_symfony_validator_form_alter(&$form, &$form_state) {
  */
 function drupal_symfony_validator_form_validate($form, &$form_state) {
   module_load_include('inc', 'drupal_symfony_validator', 'drupal_symfony_validator.validator');
-
   // Check if a validator has been set for every form element.
   foreach (element_children($form) as $element_key) {
     // Only execute the validator if a value has been set.
