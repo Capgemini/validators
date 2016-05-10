@@ -10,6 +10,9 @@
  */
 class DrupalSymfonyValidatorTestFunctions extends DrupalUnitTestCase {
 
+  /**
+   * {@inheritdoc}
+   */
   public static function getInfo() {
     return array(
       'name' => 'Drupal Symfony Validator unit tests',
@@ -21,7 +24,7 @@ class DrupalSymfonyValidatorTestFunctions extends DrupalUnitTestCase {
   /**
    * Tests for non-existing constraints.
    */
-  function testNonExistingConstraint() {
+  public function testNonExistingConstraint() {
     $violations = drupal_symfony_validator_get_violations('NonExistingConstraint', 'string');
     $this->assertNull($violations, 'Validating against a non-existing constraint should return NULL.');
   }
@@ -29,7 +32,7 @@ class DrupalSymfonyValidatorTestFunctions extends DrupalUnitTestCase {
   /**
    * Tests for the behaviour when there are no violations found.
    */
-  function testNoViolations() {
+  public function testNoViolations() {
     $violations = drupal_symfony_validator_get_violations('Blank', '');
     $this->assertTrue(is_array($violations), 'Passing a blank value to the blank constraint should return an empty array.');
   }
@@ -37,7 +40,7 @@ class DrupalSymfonyValidatorTestFunctions extends DrupalUnitTestCase {
   /**
    * Tests for the options functionalities.
    */
-  function testOptions() {
+  public function testOptions() {
     $msg = 'This is my custom error message';
     $violations = drupal_symfony_validator_get_violations('Blank', 'Not so blank', array('message' => $msg));
     $this->assertEqual($msg, $violations[0], 'Adding the message option to a constraint should change the error message.');
@@ -55,7 +58,7 @@ class DrupalSymfonyValidatorTestFunctions extends DrupalUnitTestCase {
   /**
    * Tests for the basic constraints.
    */
-  function testBasicConstraints() {
+  public function testBasicConstraints() {
     $tests = array(
       array(
         'constraint' => 'NotBlank',
@@ -103,7 +106,7 @@ class DrupalSymfonyValidatorTestFunctions extends DrupalUnitTestCase {
   /**
    * Tests for the string constraints.
    */
-  function testStringConstraints() {
+  public function testStringConstraints() {
     $tests = array(
       array(
         'constraint' => 'Email',
@@ -151,7 +154,7 @@ class DrupalSymfonyValidatorTestFunctions extends DrupalUnitTestCase {
   /**
    * Tests for the number constraints.
    */
-  function testNumberConstraints() {
+  public function testNumberConstraints() {
     $tests = array(
       array(
         'constraint' => 'Range',
@@ -171,15 +174,17 @@ class DrupalSymfonyValidatorTestFunctions extends DrupalUnitTestCase {
   /**
    * Tests the comparison constraints.
    */
-  function testComparisonConstraints() {
+  public function testComparisonConstraints() {
 
   }
 
   /**
+   * Process validation unit test.
+   *
    * Tests the array that is being returned by
    * _drupal_symfony_validator_process_validation().
    */
-  function testReturnArray() {
+  public function testReturnArray() {
     $constraint = new \Symfony\Component\Validator\Constraints\IsNull();
     $correct_value = NULL;
     $incorrect_value = 'Not so null';
@@ -211,4 +216,5 @@ class DrupalSymfonyValidatorTestFunctions extends DrupalUnitTestCase {
     $violations = drupal_symfony_validator_get_violations($test['constraint'], $test['value'], $test['options']);
     $this->assertTrue(is_array($violations), $test['msg']);
   }
+
 }

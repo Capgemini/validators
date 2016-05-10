@@ -1,7 +1,18 @@
 <?php
 
+/**
+ * @file
+ * Tests for the Form API of drupal_symfony_validator.
+ */
+
+/**
+ * Web testing class for Drupal Symfony Validator.
+ */
 class DrupalSymfonyValidatorTestForm extends DrupalWebTestCase {
 
+  /**
+   * {@inheritdoc}
+   */
   public static function getInfo() {
     return array(
       'name' => 'Form validation',
@@ -10,12 +21,18 @@ class DrupalSymfonyValidatorTestForm extends DrupalWebTestCase {
     );
   }
 
-  function setUp() {
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp() {
     parent::setUp(array('drupal_symfony_validator', 'drupal_symfony_validator_test'));
   }
-  
-  function testSingleValidator() {
-    # All valid
+
+  /**
+   * Tests the form elements.
+   */
+  public function testSingleValidator() {
+    // All valid.
     $edit = array(
       'email' => $this->randomString() . '@drupal.org',
       'notblank' => $this->randomString(),
@@ -45,7 +62,7 @@ class DrupalSymfonyValidatorTestForm extends DrupalWebTestCase {
     $this->assertNoText('This value should be a valid number.');
     $this->assertNoText('This value should be equal to');
 
-    // Invalid test 1
+    // Invalid test 1.
     $edit = array(
       'email' => $this->randomString(),
       'blank' => $this->randomString(),
@@ -68,14 +85,14 @@ class DrupalSymfonyValidatorTestForm extends DrupalWebTestCase {
     $this->assertText('This value should be 2 or more.');
     $this->assertText('This value should be equal to');
 
-    // Invalid test 2
+    // Invalid test 2.
     $edit['length'] = $this->randomString();
     $edit['range'] = 6;
     $this->drupalPost('dsv-test/single-validator', $edit, 'Submit');
     $this->assertText('This value is too long. It should have 5 characters or less.');
     $this->assertText('This value should be 5 or less.');
 
-    // Invalid test 3
+    // Invalid test 3.
     $edit['range'] = $this->randomString();
     $this->drupalPost('dsv-test/single-validator', $edit, 'Submit');
     $this->assertText('This value should be a valid number.');
