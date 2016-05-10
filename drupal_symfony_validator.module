@@ -43,21 +43,3 @@ function drupal_symfony_validator_form_validate($form, &$form_state) {
     }
   }
 }
-
-/**
- * Implements hook_menu().
- */
-function drupal_symfony_validator_menu() {
-  $items = array();
-
-  $items['debug'] = array(
-    '#type' => 'textfield',
-    'title' => 'Feed aggregator',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('drupal_symfony_validator_form'),
-    'access arguments' => array('access news feeds'),
-    'weight' => 5,
-  );
-
-  return $items;
-}
