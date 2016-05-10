@@ -1,0 +1,7 @@
+drupal_symfony_validator_form_test:
+  path: 'dsv-test/single-validator'
+  defaults:
+    _form: '\Drupal\drupal_symfony_validator_test\Form\TestForm'
+    _title: 'Form single #validators validation'
+  requirements:
+    _permission: 'access content'

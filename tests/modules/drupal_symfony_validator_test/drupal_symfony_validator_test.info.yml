@@ -1,0 +1,5 @@
+name: 'Drupal Symfony Validator form testing'
+type: module
+description: 'Support module for Drupal Symfony Validator form-related testing.'
+package: Testing
+core: 8.x

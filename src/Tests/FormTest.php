@@ -2,36 +2,53 @@
 
 /**
  * @file
- * Tests for the Form API of drupal_symfony_validator.
+ * Contains \Drupal\drupal_symfony_validator\Tests\FormTest.
  */
+
+namespace Drupal\drupal_symfony_validator\Tests;
+
+use Drupal\simpletest\WebTestBase;
+use Drupal\Core\Url;
 
 /**
  * Web testing class for Drupal Symfony Validator.
+ *
+ * @group drupal_symfony_validator
  */
-class DrupalSymfonyValidatorTestForm extends DrupalWebTestCase {
+class FormTest extends WebTestBase {
 
   /**
-   * {@inheritdoc}
+   * The profile to install as a basis for testing.
+   *
+   * @var string
    */
-  public static function getInfo() {
-    return array(
-      'name' => 'Form validation',
-      'description' => 'Tests various form element validation mechanisms.',
-      'group' => 'Drupal Symfony Validator',
-    );
-  }
+  protected $profile = 'testing';
+
+  /**
+   * The route where the test form can be found.
+   *
+   * @var string
+   */
+  protected $formRoute;
+
+  /**
+   * The modules to be loaded for these tests.
+   */
+  public static $modules = ['drupal_symfony_validator', 'drupal_symfony_validator_test'];
 
   /**
    * {@inheritdoc}
    */
   public function setUp() {
-    parent::setUp(array('drupal_symfony_validator', 'drupal_symfony_validator_test'));
+    parent::setUp();
+    $this->formRoute = Url::fromRoute('drupal_symfony_validator_form_test');
   }
 
   /**
    * Tests the form elements.
    */
   public function testSingleValidator() {
+    $this->drupalLogin($this->rootUser);
     // All valid.
     $edit = array(
       'email' => $this->randomString() . '@drupal.org',
@@ -46,7 +63,7 @@ class DrupalSymfonyValidatorTestForm extends DrupalWebTestCase {
       'range' => 3,
       'equalto' => 'valid',
     );
-    $this->drupalPost('dsv-test/single-validator', $edit, 'Submit');
+    $this->drupalPostForm($this->formRoute, $edit, 'Submit');
     $this->assertNoText('This value is not a valid email address.');
     $this->assertNoText('This value should not be blank.');
     $this->assertNoText('This value should be blank.');
@@ -74,7 +91,7 @@ class DrupalSymfonyValidatorTestForm extends DrupalWebTestCase {
       'range' => 1,
       'equalto' => $this->randomString(),
     );
-    $this->drupalPost('dsv-test/single-validator', $edit, 'Submit');
+    $this->drupalPostForm($this->formRoute, $edit, 'Submit');
     $this->assertText('This value is not a valid email address.');
     $this->assertText('This value should be blank.');
     $this->assertText('This value is too short. It should have 2 characters or more.');
@@ -88,13 +105,13 @@ class DrupalSymfonyValidatorTestForm extends DrupalWebTestCase {
     // Invalid test 2.
     $edit['length'] = $this->randomString();
     $edit['range'] = 6;
-    $this->drupalPost('dsv-test/single-validator', $edit, 'Submit');
+    $this->drupalPostForm($this->formRoute, $edit, 'Submit');
     $this->assertText('This value is too long. It should have 5 characters or less.');
     $this->assertText('This value should be 5 or less.');
 
     // Invalid test 3.
     $edit['range'] = $this->randomString();
-    $this->drupalPost('dsv-test/single-validator', $edit, 'Submit');
+    $this->drupalPostForm($this->formRoute, $edit, 'Submit');
     $this->assertText('This value should be a valid number.');
 
   }

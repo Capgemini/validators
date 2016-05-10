@@ -1,5 +1,0 @@
-name = Drupal Symfony Validator test
-description = Provides test validators.
-package = Testing
-core = 7.x
-hidden = TRUE

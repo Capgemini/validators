@@ -4,60 +4,44 @@
  * Symfony Validator for Drupal.
  */
 
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element;
+
 /**
  * Implements hook_form_alter().
  */
-function drupal_symfony_validator_form_alter(&$form, &$form_state) {
+function drupal_symfony_validator_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $form['#validate'][] = 'drupal_symfony_validator_form_validate';
 }
 
 /**
  * Implements hook_form_validate().
  */
-function drupal_symfony_validator_form_validate($form, &$form_state) {
-  module_load_include('inc', 'drupal_symfony_validator', 'drupal_symfony_validator.validator');
+function drupal_symfony_validator_form_validate($form, FormStateInterface $form_state) {
   // Check if a validator has been set for every form element.
-  foreach (element_children($form) as $element_key) {
+  foreach (Element::children($form) as $element_key) {
     // Only execute the validator if a value has been set.
-    if (isset($form[$element_key]['#validators']) && isset($form_state['values'][$element_key]) && $form_state['values'][$element_key] != '') {
+    $value = $form_state->getValue($element_key);
+    if (isset($form[$element_key]['#validators']) && $value != NULL) {
       $violations = array();
-      $value = $form_state['values'][$element_key];
-      foreach ($form[$element_key]['#validators'] as $validator_key => $validator_value) {
+      foreach ($form[$element_key]['#validators'] as $constraint_key => $constraint_value) {
         // A form can have a single validator. In that case, the array key
         // will be numeric.
-        if (is_numeric($validator_key)) {
-          $validator = $validator_value;
+        if (is_numeric($constraint_key)) {
+          $constraint = $constraint_value;
           $options = array();
         }
         // When a form has multiple validators, the array key will be the
         // validator.
         else {
-          $validator = $validator_key;
-          $options = is_array($validator_value) ? $validator_value : array();
+          $constraint = $constraint_key;
+          $options = is_array($constraint_value) ? $constraint_value : array();
         }
-        $violations = drupal_symfony_validator_get_violations($validator, $value, $options);
+        $violations = \Drupal::service('drupal_symfony_validator.validator')->violations($constraint, $value, $options);
       }
       foreach ($violations as $violation) {
-        form_set_error($element_key, check_plain($violation));
+        $form_state->setErrorByName($element_key, t($violation));
       }
     }
   }
-}
-
-/**
- * Implements hook_menu().
- */
-function drupal_symfony_validator_menu() {
-  $items = array();
-
-  $items['debug'] = array(
-    '#type' => 'textfield',
-    'title' => 'Feed aggregator',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('drupal_symfony_validator_form'),
-    'access arguments' => array('access news feeds'),
-    'weight' => 5,
-  );
-
-  return $items;
 }
