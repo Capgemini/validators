@@ -1,0 +1,5 @@
+name: 'Validators form testing'
+type: module
+description: 'Support module for Validators form-related testing.'
+package: Testing
+core: 8.x

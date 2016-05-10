@@ -2,15 +2,15 @@
 
 /**
  * @file
- * Contains \Drupal\drupal_symfony_validator\ValidatorEvents.
+ * Contains \Drupal\validators\ValidatorsEvents.
  */
 
-namespace Drupal\drupal_symfony_validator\Event;
+namespace Drupal\validators\Event;
 
 /**
  * Contains all events thrown while handling Symfony Validator.
  */
-final class ValidatorEvents {
+final class ValidatorsEvents {
 
   /**
    * The event triggered when there's no Symfony Validator constraint found.
@@ -21,10 +21,10 @@ final class ValidatorEvents {
    *
    * @Event
    *
-   * @see \Drupal\drupal_symfony_validator\ValidatorEvent
+   * @see \Drupal\validators\ValidatorEvent
    *
    * @var string
    */
-  const CUSTOM_VALIDATION = 'drupal_symfony_validator.custom_validation';
+  const CUSTOM_VALIDATION = 'validators.custom_validation';
 
 }

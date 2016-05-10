@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains \Drupal\drupal_symfony_validator\ValidatorEvent.
+ * Contains \Drupal\validators\ValidatorsEvent.
  */
 
-namespace Drupal\drupal_symfony_validator\Event;
+namespace Drupal\validators\Event;
 
 use Symfony\Component\EventDispatcher\Event;
 
@@ -13,7 +13,7 @@ use Symfony\Component\EventDispatcher\Event;
 /**
  * Wraps a validator event for event listeners.
  */
-class ValidatorEvent extends Event {
+class ValidatorsEvent extends Event {
 
   /**
    * Custom constraint that is used in the form validation.

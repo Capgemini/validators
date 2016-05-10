@@ -2,18 +2,18 @@
 
 /**
  * @file
- * Contains \Drupal\drupal_symfony_validator\Validator.
+ * Contains \Drupal\validators\ValidatorsManager.
  */
 
-namespace Drupal\drupal_symfony_validator;
+namespace Drupal\validators;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Validation;
 
 /**
- * Defines a validator that can be used for validating forms.
+ * Defines a validators manager that can be used for validating forms.
  */
-class Validator {
+class ValidatorsManager {
 
   /**
    * Processes validation.
@@ -83,11 +83,11 @@ class Validator {
     // Check if another module is delivering an assertion for the given
     // constraint.
     else {
-      $e = new Event\ValidatorEvent($constraint);
+      $e = new Event\ValidatorsEvent($constraint);
 
-      /** @var Event\ValidatorEvent $event */
+      /** @var Event\ValidatorsEvent $event */
       $event = \Drupal::service('event_dispatcher')
-        ->dispatch(Event\ValidatorEvents::CUSTOM_VALIDATION, $e);
+        ->dispatch(Event\ValidatorsEvents::CUSTOM_VALIDATION, $e);
 
       foreach ($event->getValidators() as $custom_constraint) {
         $assert_classes[] = self::loadAssertClass($custom_constraint, $options);
