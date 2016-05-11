@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\Tests\validator\Unit\TestConstraints.
+ * Contains \Drupal\Tests\validators\Unit\TestConstraints.
  */
 
 namespace Drupal\Tests\validators\Unit;
