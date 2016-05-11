@@ -44,10 +44,9 @@ function _validators_process_validation($value, Constraint $constraint) {
  *
  * @see http://symfony.com/doc/current/book/validation.html#supported-constraints
  *
- * @return array|null
- *   Returns NULL if the constraint does not exist. An array containing the
- *   violations messages if any violations persist. An empty array if there are
- *   no violations.
+ * @return array
+ *   An array containing the violations messages if any violations persist. An
+ *   empty array if there are no violations or the constraint does not exist.
  */
 function validators_get_violations($constraint, $value, array $options = array()) {
   module_load_include('inc', 'validators', 'validators.asserts');
