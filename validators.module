@@ -44,5 +44,9 @@ function validators_form_validate($form, FormStateInterface $form_state) {
         $form_state->setErrorByName($element_key, t($violation));
       }
     }
+
+    // Recursive call the same function again in order to support nested render
+    // arrays.
+    validators_form_validate($form[$element_key], $form_state);
   }
 }

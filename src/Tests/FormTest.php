@@ -62,6 +62,7 @@ class FormTest extends WebTestBase {
       'uuid' => '216fff40-98d9-11e3-a5e2-0800200c9a66',
       'range' => 3,
       'equalto' => 'valid',
+      'nested_email' => $this->randomString() . '@drupal.org',
     );
     $this->drupalPostForm($this->formRoute, $edit, 'Submit');
     $this->assertNoText('This value is not a valid email address.');
@@ -78,6 +79,7 @@ class FormTest extends WebTestBase {
     $this->assertNoText('This value should be 5 or less.');
     $this->assertNoText('This value should be a valid number.');
     $this->assertNoText('This value should be equal to');
+    $this->assertNoText('This value inside the fieldset is not a valid email address.');
 
     // Invalid test 1.
     $edit = array(
@@ -90,6 +92,7 @@ class FormTest extends WebTestBase {
       'uuid' => $this->randomString(),
       'range' => 1,
       'equalto' => $this->randomString(),
+      'nested_email' => $this->randomString(),
     );
     $this->drupalPostForm($this->formRoute, $edit, 'Submit');
     $this->assertText('This value is not a valid email address.');
@@ -101,6 +104,7 @@ class FormTest extends WebTestBase {
     $this->assertText('This is not a valid UUID.');
     $this->assertText('This value should be 2 or more.');
     $this->assertText('This value should be equal to');
+    $this->assertText('This value inside the fieldset is not a valid email address.');
 
     // Invalid test 2.
     $edit['length'] = $this->randomString();

@@ -124,6 +124,21 @@ class TestForm extends FormBase {
       ),
     );
 
+    $form['fieldset'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Fieldset'),
+    );
+
+    $form['fieldset']['nested_email'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Email fieldset'),
+      '#validators' => array(
+        'Email' => array(
+          'message' => 'This value inside the fieldset is not a valid email address.',
+        ),
+      ),
+    );
+
     $form['submit'] = array(
       '#type' => 'submit',
       '#value' => 'Submit',

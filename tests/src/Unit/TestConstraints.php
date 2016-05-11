@@ -29,7 +29,7 @@ class TestConstraints extends UnitTestCase {
    */
   public function setUp() {
     $container = new ContainerBuilder();
-    $validator = $this->getMockBuilder('\Drupal\validator\Validator')
+    $validator = $this->getMockBuilder('\Drupal\validators\ValidatorsManager')
       ->disableOriginalConstructor()
       ->getMock();
     $validator
