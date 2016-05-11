@@ -1,4 +1,4 @@
-name = Drupal Symfony Validator
+name = Validators
 description = Symfony (form) Validator for Drupal 7.
 package = Symfony
 core = 7.x
@@ -7,5 +7,5 @@ php = 5.3.x
 
 dependencies[] = composer_manager
 
-files[] = tests/drupal_symfony_validator.test
-files[] = tests/drupal_symfony_validator.form.test
+files[] = tests/validators.test
+files[] = tests/validators.form.test

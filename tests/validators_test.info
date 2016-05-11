@@ -1,4 +1,4 @@
-name = Drupal Symfony Validator test
+name = Validators test
 description = Provides test validators.
 package = Testing
 core = 7.x

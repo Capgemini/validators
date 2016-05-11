@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Provides the functions that interact with the Symfony Validator.
@@ -18,7 +19,7 @@ use Symfony\Component\Validator\Constraint;
  * @return array
  *   An array containing error messages in case of validation errors.
  */
-function _drupal_symfony_validator_process_validation($value, Constraint $constraint) {
+function _validators_process_validation($value, Constraint $constraint) {
   $validator = Validation::createValidator();
   $violations = $validator->validate($value, $constraint);
 
@@ -48,8 +49,8 @@ function _drupal_symfony_validator_process_validation($value, Constraint $constr
  *   violations messages if any violations persist. An empty array if there are
  *   no violations.
  */
-function drupal_symfony_validator_get_violations($constraint, $value, array $options = array()) {
-  module_load_include('inc', 'drupal_symfony_validator', 'drupal_symfony_validator.asserts');
+function validators_get_violations($constraint, $value, array $options = array()) {
+  module_load_include('inc', 'validators', 'validators.asserts');
   $violations = array();
 
   $functions = array(
@@ -69,9 +70,9 @@ function drupal_symfony_validator_get_violations($constraint, $value, array $opt
   );
 
   $assert = array_key_exists(strtolower($constraint), $functions) ? $functions[strtolower($constraint)] : $constraint;
-  $function = 'drupal_symfony_validator_assert_' . $assert;
+  $function = 'validators_assert_' . $assert;
 
-  // Check if drupal_symfony_validator has an assertion for the given
+  // Check if validators has an assertion for the given
   // constraint.
   if (function_exists($function)) {
     $violations = call_user_func($function, $value, $options);
@@ -80,8 +81,8 @@ function drupal_symfony_validator_get_violations($constraint, $value, array $opt
   // constraint.
   else {
     foreach (module_invoke_all('validator_asserts', $constraint, $options) as $custom_constraint) {
-      if (is_subclass_of($custom_constraint, 'Symfony\Component\Validator\Constraint')){
-        foreach (drupal_symfony_validator_assert_hook($value, $custom_constraint) as $custom_violation) {
+      if (is_subclass_of($custom_constraint, 'Symfony\Component\Validator\Constraint')) {
+        foreach (validators_assert_hook($value, $custom_constraint) as $custom_violation) {
           $violations[] = $custom_violation;
         }
       }

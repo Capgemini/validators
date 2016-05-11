@@ -6,15 +6,15 @@
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-function drupal_symfony_validator_assert_hook($value, $constraint) {
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+function validators_assert_hook($value, $constraint) {
+  return _validators_process_validation($value, $constraint);
 }
 /**
  * Assert not blank.
  *
  * Validates that a value is not blank, defined as not strictly false, not equal
  * to a blank string and also not equal to null. To force that a value is simply
- * not equal to null, see drupal_symfony_validator_assert_not_null().
+ * not equal to null, see validators_assert_not_null().
  *
  * Options:
  * - message: (optional) (string) (Default: 'This value should not be blank.')
@@ -29,11 +29,11 @@ function drupal_symfony_validator_assert_hook($value, $constraint) {
  *   Returns an array containing the violation messages. If there are no
  *   violations, an empty array will be returned.
  *
- * @see drupal_symfony_validator_assert_not_null()
+ * @see validators_assert_not_null()
  */
-function drupal_symfony_validator_assert_not_blank($value, $options = array()) {
+function validators_assert_not_blank($value, $options = array()) {
   $constraint = new Assert\NotBlank($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -41,8 +41,8 @@ function drupal_symfony_validator_assert_not_blank($value, $options = array()) {
  *
  * Validates that a value is blank, defined as equal to a blank string or equal
  * to null. To force that a value strictly be equal to null, see the
- * drupal_symfony_validator_assert_is_null() constraint. To force that a value
- * is not blank, see drupal_symfony_validator_assert_not_blank().
+ * validators_assert_is_null() constraint. To force that a value
+ * is not blank, see validators_assert_not_blank().
  *
  * Options:
  * - message: (optional) (string) (Default: 'This value should be blank.') This
@@ -57,12 +57,12 @@ function drupal_symfony_validator_assert_not_blank($value, $options = array()) {
  *   Returns an array containing the violation messages. If there are no
  *   violations, an empty array will be returned.
  *
- * @see drupal_symfony_validator_assert_is_null()
- * @see drupal_symfony_validator_assert_not_blank()
+ * @see validators_assert_is_null()
+ * @see validators_assert_not_blank()
  */
-function drupal_symfony_validator_assert_blank($value, $options = array()) {
+function validators_assert_blank($value, $options = array()) {
   $constraint = new Assert\Blank($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -70,7 +70,7 @@ function drupal_symfony_validator_assert_blank($value, $options = array()) {
  *
  * Validates that a value is not strictly equal to null. To ensure that a value
  * is simply not blank (not a blank string), see the
- * drupal_symfony_validator_assert_not_blank constraint.
+ * validators_assert_not_blank constraint.
  *
  * Options:
  * - message: (optional) (string) (Default: 'This value should not be null.')
@@ -85,11 +85,11 @@ function drupal_symfony_validator_assert_blank($value, $options = array()) {
  *   Returns an array containing the violation messages. If there are no
  *   violations, an empty array will be returned.
  *
- * @see drupal_symfony_validator_assert_not_blank()
+ * @see validators_assert_not_blank()
  */
-function drupal_symfony_validator_assert_not_null($value, $options = array()) {
+function validators_assert_not_null($value, $options = array()) {
   $constraint = new Assert\NotNull($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -97,8 +97,8 @@ function drupal_symfony_validator_assert_not_null($value, $options = array()) {
  *
  * Validates that a value is exactly equal to null. To force that a property is
  * simply blank (blank string or null), see the
- * drupal_symfony_validator_assert_blank() constraint. To ensure that a property
- * is not null, see drupal_symfony_validator_assert_not_null().
+ * validators_assert_blank() constraint. To ensure that a property
+ * is not null, see validators_assert_not_null().
  *
  * Options:
  * - message: (optional) (string) (Default: 'This value should be null.') This
@@ -113,12 +113,12 @@ function drupal_symfony_validator_assert_not_null($value, $options = array()) {
  *   Returns an array containing the violation messages. If there are no
  *   violations, an empty array will be returned.
  *
- * @see drupal_symfony_validator_assert_not_null()
- * @see drupal_symfony_validator_assert_blank()
+ * @see validators_assert_not_null()
+ * @see validators_assert_blank()
  */
-function drupal_symfony_validator_assert_is_null($value, $options = array()) {
+function validators_assert_is_null($value, $options = array()) {
   $constraint = new Assert\IsNull($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -140,11 +140,11 @@ function drupal_symfony_validator_assert_is_null($value, $options = array()) {
  *   Returns an array containing the violation messages. If there are no
  *   violations, an empty array will be returned.
  *
- * @see drupal_symfony_validator_assert_is_false()
+ * @see validators_assert_is_false()
  */
-function drupal_symfony_validator_assert_is_true($value, $options = array()) {
+function validators_assert_is_true($value, $options = array()) {
   $constraint = new Assert\IsTrue($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -166,11 +166,11 @@ function drupal_symfony_validator_assert_is_true($value, $options = array()) {
  *   Returns an array containing the violation messages. If there are no
  *   violations, an empty array will be returned.
  *
- * @see drupal_symfony_validator_assert_is_true()
+ * @see validators_assert_is_true()
  */
-function drupal_symfony_validator_assert_is_false($value, $options = array()) {
+function validators_assert_is_false($value, $options = array()) {
   $constraint = new Assert\IsFalse($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -203,9 +203,9 @@ function drupal_symfony_validator_assert_is_false($value, $options = array()) {
  *
  * @see http://php.net/manual/en/function.setlocale.php
  */
-function drupal_symfony_validator_assert_type($value, $options = array()) {
+function validators_assert_type($value, $options = array()) {
   $constraint = new Assert\Type($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -241,9 +241,9 @@ function drupal_symfony_validator_assert_type($value, $options = array()) {
  * @see https://packagist.org/packages/egulias/email-validator
  * @see checkdnsrr()
  */
-function drupal_symfony_validator_assert_email($value, $options = array()) {
+function validators_assert_email($value, $options = array()) {
   $constraint = new Assert\Email($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -288,9 +288,9 @@ function drupal_symfony_validator_assert_email($value, $options = array()) {
  * @see mb_strlen()
  * @see strlen()
  */
-function drupal_symfony_validator_assert_length($value, $options = array()) {
+function validators_assert_length($value, $options = array()) {
   $constraint = new Assert\Length($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -323,9 +323,9 @@ function drupal_symfony_validator_assert_length($value, $options = array()) {
  *
  * @see checkdnsrr()
  */
-function drupal_symfony_validator_assert_url($value, $options = array()) {
+function validators_assert_url($value, $options = array()) {
   $constraint = new Assert\Url($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -369,9 +369,9 @@ function drupal_symfony_validator_assert_url($value, $options = array()) {
  *
  * @see preg_match()
  */
-function drupal_symfony_validator_assert_regex($value, $options = array()) {
+function validators_assert_regex($value, $options = array()) {
   $constraint = new Assert\Regex($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -414,9 +414,9 @@ function drupal_symfony_validator_assert_regex($value, $options = array()) {
  *   Returns an array containing the violation messages. If there are no
  *   violations, an empty array will be returned.
  */
-function drupal_symfony_validator_assert_ip($value, $options = array()) {
+function validators_assert_ip($value, $options = array()) {
   $constraint = new Assert\Ip($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -461,9 +461,9 @@ function drupal_symfony_validator_assert_ip($value, $options = array()) {
  * @see http://en.wikipedia.org/wiki/Universally_unique_identifier
  * @see http://tools.ietf.org/html/rfc4122
  */
-function drupal_symfony_validator_assert_uuid($value, $options = array()) {
+function validators_assert_uuid($value, $options = array()) {
   $constraint = new Assert\Uuid($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -497,9 +497,9 @@ function drupal_symfony_validator_assert_uuid($value, $options = array()) {
  *
  * @see is_numeric()
  */
-function drupal_symfony_validator_assert_range($value, $options = array()) {
+function validators_assert_range($value, $options = array()) {
   $constraint = new Assert\Range($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -507,7 +507,7 @@ function drupal_symfony_validator_assert_range($value, $options = array()) {
  *
  * Validates that a value is equal to another value, defined in the options.
  * To force that a value is not equal, see
- * drupal_symfony_validator_assert_not_equal_to().
+ * validators_assert_not_equal_to().
  *
  * Options
  * - value: (mixed) This option is required. It defines the value to compare to.
@@ -525,11 +525,11 @@ function drupal_symfony_validator_assert_range($value, $options = array()) {
  *   Returns an array containing the violation messages. If there are no
  *   violations, an empty array will be returned.
  *
- * @see drupal_symfony_validator_assert_not_equal_to()
+ * @see validators_assert_not_equal_to()
  */
-function drupal_symfony_validator_assert_equal_to($value, $options = array()) {
+function validators_assert_equal_to($value, $options = array()) {
   $constraint = new Assert\EqualTo($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -537,7 +537,7 @@ function drupal_symfony_validator_assert_equal_to($value, $options = array()) {
  *
  * Validates that a value is not equal to another value, defined in the
  * options. To force that a value is equal, see
- * drupal_symfony_validator_assert_equal_to().
+ * validators_assert_equal_to().
  *
  * Options
  * - value: (mixed) This option is required. It defines the value to compare to.
@@ -555,11 +555,11 @@ function drupal_symfony_validator_assert_equal_to($value, $options = array()) {
  *   Returns an array containing the violation messages. If there are no
  *   violations, an empty array will be returned.
  *
- * @see drupal_symfony_validator_assert_equal_to()
+ * @see validators_assert_equal_to()
  */
-function drupal_symfony_validator_assert_not_equal_to($value, $options = array()) {
+function validators_assert_not_equal_to($value, $options = array()) {
   $constraint = new Assert\NotEqualTo($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -567,7 +567,7 @@ function drupal_symfony_validator_assert_not_equal_to($value, $options = array()
  *
  * Validates that a value is identical to another value, defined in the
  * options. To force that a value is not identical, see
- * drupal_symfony_validator_assert_not_identical_to().
+ * validators_assert_not_identical_to().
  *
  * Options
  * - value: (mixed) This option is required. It defines the value to compare to.
@@ -584,11 +584,11 @@ function drupal_symfony_validator_assert_not_equal_to($value, $options = array()
  *   Returns an array containing the violation messages. If there are no
  *   violations, an empty array will be returned.
  *
- * @see drupal_symfony_validator_assert_not_identical_to()
+ * @see validators_assert_not_identical_to()
  */
-function drupal_symfony_validator_assert_identical_to($value, $options = array()) {
+function validators_assert_identical_to($value, $options = array()) {
   $constraint = new Assert\IdenticalTo($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -596,7 +596,7 @@ function drupal_symfony_validator_assert_identical_to($value, $options = array()
  *
  * Validates that a value is not identical to another value, defined in the
  * options. To force that a value is identical, see
- * drupal_symfony_validator_assert_identical_to().
+ * validators_assert_identical_to().
  *
  * Options
  * - value: (mixed) This option is required. It defines the value to compare to.
@@ -614,11 +614,11 @@ function drupal_symfony_validator_assert_identical_to($value, $options = array()
  *   Returns an array containing the violation messages. If there are no
  *   violations, an empty array will be returned.
  *
- * @see drupal_symfony_validator_assert_identical_to()
+ * @see validators_assert_identical_to()
  */
-function drupal_symfony_validator_assert_not_identical_to($value, $options = array()) {
+function validators_assert_not_identical_to($value, $options = array()) {
   $constraint = new Assert\NotIdenticalTo($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -626,8 +626,8 @@ function drupal_symfony_validator_assert_not_identical_to($value, $options = arr
  *
  * Validates that a value is less than another value, defined in the options.
  * To force that a value is less than or equal to another value,
- * see drupal_symfony_validator_assert_less_than_or_equal. To force a value is
- * greater than another value, see drupal_symfony_validator_assert_greater_than.
+ * see validators_assert_less_than_or_equal. To force a value is
+ * greater than another value, see validators_assert_greater_than.
  *
  * Options
  * - value: (mixed) This option is required. It defines the value to compare to.
@@ -645,12 +645,12 @@ function drupal_symfony_validator_assert_not_identical_to($value, $options = arr
  *   Returns an array containing the violation messages. If there are no
  *   violations, an empty array will be returned.
  *
- * @see drupal_symfony_validator_assert_less_than_or_equal()
- * @see drupal_symfony_validator_assert_greater_than()
+ * @see validators_assert_less_than_or_equal()
+ * @see validators_assert_greater_than()
  */
-function drupal_symfony_validator_assert_less_than($value, $options = array()) {
+function validators_assert_less_than($value, $options = array()) {
   $constraint = new Assert\LessThan($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -658,7 +658,7 @@ function drupal_symfony_validator_assert_less_than($value, $options = array()) {
  *
  * Validates that a value is less than or equal to another value, defined in
  * the options. To force that a value is less than another value,
- * see drupal_symfony_validator_assert_less_than().
+ * see validators_assert_less_than().
  *
  * Options
  * - value: (mixed) This option is required. It defines the value to compare to.
@@ -676,11 +676,11 @@ function drupal_symfony_validator_assert_less_than($value, $options = array()) {
  *   Returns an array containing the violation messages. If there are no
  *   violations, an empty array will be returned.
  *
- * @see drupal_symfony_validator_assert_less_than()
+ * @see validators_assert_less_than()
  */
-function drupal_symfony_validator_assert_less_than_or_equal($value, $options = array()) {
+function validators_assert_less_than_or_equal($value, $options = array()) {
   $constraint = new Assert\LessThanOrEqual($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -688,9 +688,9 @@ function drupal_symfony_validator_assert_less_than_or_equal($value, $options = a
  *
  * Validates that a value is greater than another value, defined in the
  * options. To force that a value is greater than or equal to another value,
- * see drupal_symfony_validator_assert_greater_than_or_equal(). To force a
+ * see validators_assert_greater_than_or_equal(). To force a
  * value is less than another value, see
- * drupal_symfony_validator_assert_less_than().
+ * validators_assert_less_than().
  *
  * Options
  * - value: (mixed) This option is required. It defines the value to compare to.
@@ -708,12 +708,12 @@ function drupal_symfony_validator_assert_less_than_or_equal($value, $options = a
  *   Returns an array containing the violation messages. If there are no
  *   violations, an empty array will be returned.
  *
- * @see drupal_symfony_validator_assert_greater_than_or_equal()
- * @see drupal_symfony_validator_assert_less_than()
+ * @see validators_assert_greater_than_or_equal()
+ * @see validators_assert_less_than()
  */
-function drupal_symfony_validator_assert_greater_than($value, $options = array()) {
+function validators_assert_greater_than($value, $options = array()) {
   $constraint = new Assert\GreaterThan($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -721,7 +721,7 @@ function drupal_symfony_validator_assert_greater_than($value, $options = array()
  *
  * Validates that a value is greater than or equal to another value, defined
  * in the options. To force that a value is greater than another value, see
- * drupal_symfony_validator_assert_greater_than().
+ * validators_assert_greater_than().
  *
  * Options
  * - value: (mixed) This option is required. It defines the value to compare to.
@@ -739,11 +739,11 @@ function drupal_symfony_validator_assert_greater_than($value, $options = array()
  *   Returns an array containing the violation messages. If there are no
  *   violations, an empty array will be returned.
  *
- * @see drupal_symfony_validator_assert_greater_than()
+ * @see validators_assert_greater_than()
  */
-function drupal_symfony_validator_assert_greater_than_or_equal($value, $options = array()) {
+function validators_assert_greater_than_or_equal($value, $options = array()) {
   $constraint = new Assert\GreaterThanOrEqual($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -766,9 +766,9 @@ function drupal_symfony_validator_assert_greater_than_or_equal($value, $options 
  *   Returns an array containing the violation messages. If there are no
  *   violations, an empty array will be returned.
  */
-function drupal_symfony_validator_assert_date($value, $options = array()) {
+function validators_assert_date($value, $options = array()) {
   $constraint = new Assert\Date($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -792,9 +792,9 @@ function drupal_symfony_validator_assert_date($value, $options = array()) {
  *   Returns an array containing the violation messages. If there are no
  *   violations, an empty array will be returned.
  */
-function drupal_symfony_validator_assert_datetime($value, $options = array()) {
+function validators_assert_datetime($value, $options = array()) {
   $constraint = new Assert\DateTime($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -817,9 +817,9 @@ function drupal_symfony_validator_assert_datetime($value, $options = array()) {
  *   Returns an array containing the violation messages. If there are no
  *   violations, an empty array will be returned.
  */
-function drupal_symfony_validator_assert_time($value, $options = array()) {
+function validators_assert_time($value, $options = array()) {
   $constraint = new Assert\Time($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -879,9 +879,9 @@ function drupal_symfony_validator_assert_time($value, $options = array()) {
  *
  * @see http://symfony.com/doc/current/reference/constraints/Choice.html#supplying-the-choices-with-a-callback-function
  */
-function drupal_symfony_validator_assert_choice($value, $options = array()) {
+function validators_assert_choice($value, $options = array()) {
   $constraint = new Assert\Choice($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -925,9 +925,9 @@ function drupal_symfony_validator_assert_choice($value, $options = array()) {
  *   Returns an array containing the violation messages. If there are no
  *   violations, an empty array will be returned.
  */
-function drupal_symfony_validator_assert_collection($value, $options = array()) {
+function validators_assert_collection($value, $options = array()) {
   $constraint = new Assert\Collection($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -962,9 +962,9 @@ function drupal_symfony_validator_assert_collection($value, $options = array()) 
  *   Returns an array containing the violation messages. If there are no
  *   violations, an empty array will be returned.
  */
-function drupal_symfony_validator_assert_count($value, $options = array()) {
+function validators_assert_count($value, $options = array()) {
   $constraint = new Assert\Count($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -987,9 +987,9 @@ function drupal_symfony_validator_assert_count($value, $options = array()) {
  *   Returns an array containing the violation messages. If there are no
  *   violations, an empty array will be returned.
  */
-function drupal_symfony_validator_assert_language($value, $options = array()) {
+function validators_assert_language($value, $options = array()) {
   $constraint = new Assert\Language($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -1016,9 +1016,9 @@ function drupal_symfony_validator_assert_language($value, $options = array()) {
  * @see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
  * @see https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes
  */
-function drupal_symfony_validator_assert_locale($value, $options = array()) {
+function validators_assert_locale($value, $options = array()) {
   $constraint = new Assert\Locale($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -1041,9 +1041,9 @@ function drupal_symfony_validator_assert_locale($value, $options = array()) {
  *
  * @see https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes
  */
-function drupal_symfony_validator_assert_country($value, $options = array()) {
+function validators_assert_country($value, $options = array()) {
   $constraint = new Assert\Country($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -1115,9 +1115,9 @@ function drupal_symfony_validator_assert_country($value, $options = array()) {
  * @see http://en.wikipedia.org/wiki/Binary_prefix
  * @see http://www.iana.org/assignments/media-types/index.html
  */
-function drupal_symfony_validator_assert_file($value, $options = array()) {
+function validators_assert_file($value, $options = array()) {
   $constraint = new Assert\File($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -1199,9 +1199,9 @@ function drupal_symfony_validator_assert_file($value, $options = array()) {
  *
  * @see http://www.iana.org/assignments/media-types/image/index.html
  */
-function drupal_symfony_validator_assert_image($value, $options = array()) {
+function validators_assert_image($value, $options = array()) {
   $constraint = new Assert\Image($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -1233,9 +1233,9 @@ function drupal_symfony_validator_assert_image($value, $options = array()) {
  *
  * @see https://en.wikipedia.org/wiki/Bank_card_number#Issuer_identification_number_.28IIN.29
  */
-function drupal_symfony_validator_assert_card_scheme($value, $options = array()) {
+function validators_assert_card_scheme($value, $options = array()) {
   $constraint = new Assert\CardScheme($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -1258,9 +1258,9 @@ function drupal_symfony_validator_assert_card_scheme($value, $options = array())
  *
  * @see https://en.wikipedia.org/wiki/ISO_4217
  */
-function drupal_symfony_validator_assert_currency($value, $options = array()) {
+function validators_assert_currency($value, $options = array()) {
   $constraint = new Assert\Currency($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -1285,9 +1285,9 @@ function drupal_symfony_validator_assert_currency($value, $options = array()) {
  *
  * @see https://en.wikipedia.org/wiki/Luhn_algorithm
  */
-function drupal_symfony_validator_assert_luhn($value, $options = array()) {
+function validators_assert_luhn($value, $options = array()) {
   $constraint = new Assert\Luhn($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -1314,9 +1314,9 @@ function drupal_symfony_validator_assert_luhn($value, $options = array()) {
  *
  * @see https://en.wikipedia.org/wiki/International_Bank_Account_Number
  */
-function drupal_symfony_validator_assert_iban($value, $options = array()) {
+function validators_assert_iban($value, $options = array()) {
   $constraint = new Assert\Iban($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -1358,9 +1358,9 @@ function drupal_symfony_validator_assert_iban($value, $options = array()) {
  *
  * @see https://en.wikipedia.org/wiki/Isbn
  */
-function drupal_symfony_validator_assert_isbn($value, $options = array()) {
+function validators_assert_isbn($value, $options = array()) {
   $constraint = new Assert\Isbn($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -1390,9 +1390,9 @@ function drupal_symfony_validator_assert_isbn($value, $options = array()) {
  *
  * @see https://en.wikipedia.org/wiki/Issn
  */
-function drupal_symfony_validator_assert_issn($value, $options = array()) {
+function validators_assert_issn($value, $options = array()) {
   $constraint = new Assert\Issn($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -1429,9 +1429,9 @@ function drupal_symfony_validator_assert_issn($value, $options = array()) {
  *
  * @see http://symfony.com/doc/current/reference/constraints/Callback.html
  */
-function drupal_symfony_validator_assert_callback($value, $options = array()) {
+function validators_assert_callback($value, $options = array()) {
   $constraint = new Assert\Callback($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -1464,9 +1464,9 @@ function drupal_symfony_validator_assert_callback($value, $options = array()) {
  *   Returns an array containing the violation messages. If there are no
  *   violations, an empty array will be returned.
  */
-function drupal_symfony_validator_assert_expression($value, $options = array()) {
+function validators_assert_expression($value, $options = array()) {
   $constraint = new Assert\Expression($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -1488,9 +1488,9 @@ function drupal_symfony_validator_assert_expression($value, $options = array()) 
  *   Returns an array containing the violation messages. If there are no
  *   violations, an empty array will be returned.
  */
-function drupal_symfony_validator_assert_all($value, $options = array()) {
+function validators_assert_all($value, $options = array()) {
   $constraint = new Assert\All($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }
 
 /**
@@ -1517,7 +1517,7 @@ function drupal_symfony_validator_assert_all($value, $options = array()) {
  *   Returns an array containing the violation messages. If there are no
  *   violations, an empty array will be returned.
  */
-function drupal_symfony_validator_assert_valid($value, $options = array()) {
+function validators_assert_valid($value, $options = array()) {
   $constraint = new Assert\Valid($options);
-  return _drupal_symfony_validator_process_validation($value, $constraint);
+  return _validators_process_validation($value, $constraint);
 }

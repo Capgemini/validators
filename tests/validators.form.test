@@ -2,13 +2,13 @@
 
 /**
  * @file
- * Tests for the Form API of drupal_symfony_validator.
+ * Tests for the Form API of validators.
  */
 
 /**
- * Web testing class for Drupal Symfony Validator.
+ * Web testing class for Validators.
  */
-class DrupalSymfonyValidatorTestForm extends DrupalWebTestCase {
+class ValidatorsTestForm extends DrupalWebTestCase {
 
   /**
    * {@inheritdoc}
@@ -17,7 +17,7 @@ class DrupalSymfonyValidatorTestForm extends DrupalWebTestCase {
     return array(
       'name' => 'Form validation',
       'description' => 'Tests various form element validation mechanisms.',
-      'group' => 'Drupal Symfony Validator',
+      'group' => 'Validators',
     );
   }
 
@@ -25,7 +25,7 @@ class DrupalSymfonyValidatorTestForm extends DrupalWebTestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    parent::setUp(array('drupal_symfony_validator', 'drupal_symfony_validator_test'));
+    parent::setUp(array('validators', 'validators_test'));
   }
 
   /**

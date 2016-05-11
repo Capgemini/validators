@@ -2,22 +2,22 @@
 
 /**
  * @file
- * Tests for drupal_symfony_validator.module.
+ * Tests for validators.module.
  */
 
 /**
  * Unit testing class for Drupal Symfony Validator.
  */
-class DrupalSymfonyValidatorTestFunctions extends DrupalUnitTestCase {
+class ValidatorsTestFunctions extends DrupalUnitTestCase {
 
   /**
    * {@inheritdoc}
    */
   public static function getInfo() {
     return array(
-      'name' => 'Drupal Symfony Validator unit tests',
+      'name' => 'Validators module unit tests',
       'description' => 'Unit tests for the validator functions.',
-      'group' => 'Drupal Symfony Validator',
+      'group' => 'Validators',
     );
   }
 
@@ -25,7 +25,7 @@ class DrupalSymfonyValidatorTestFunctions extends DrupalUnitTestCase {
    * Tests for non-existing constraints.
    */
   public function testNonExistingConstraint() {
-    $violations = drupal_symfony_validator_get_violations('NonExistingConstraint', 'string');
+    $violations = validators_get_violations('NonExistingConstraint', 'string');
     $this->assertNull($violations, 'Validating against a non-existing constraint should return NULL.');
   }
 
@@ -33,7 +33,7 @@ class DrupalSymfonyValidatorTestFunctions extends DrupalUnitTestCase {
    * Tests for the behaviour when there are no violations found.
    */
   public function testNoViolations() {
-    $violations = drupal_symfony_validator_get_violations('Blank', '');
+    $violations = validators_get_violations('Blank', '');
     $this->assertTrue(is_array($violations), 'Passing a blank value to the blank constraint should return an empty array.');
   }
 
@@ -42,12 +42,12 @@ class DrupalSymfonyValidatorTestFunctions extends DrupalUnitTestCase {
    */
   public function testOptions() {
     $msg = 'This is my custom error message';
-    $violations = drupal_symfony_validator_get_violations('Blank', 'Not so blank', array('message' => $msg));
+    $violations = validators_get_violations('Blank', 'Not so blank', array('message' => $msg));
     $this->assertEqual($msg, $violations[0], 'Adding the message option to a constraint should change the error message.');
 
     $catched = FALSE;
     try {
-      drupal_symfony_validator_get_violations('Blank', 'Not so blank', array('nonexistingoption' => 'Use WordPress'));
+      validators_get_violations('Blank', 'Not so blank', array('nonexistingoption' => 'Use WordPress'));
     }
     catch (\Symfony\Component\Validator\Exception\InvalidOptionsException $e) {
       $catched = TRUE;
@@ -182,18 +182,18 @@ class DrupalSymfonyValidatorTestFunctions extends DrupalUnitTestCase {
    * Process validation unit test.
    *
    * Tests the array that is being returned by
-   * _drupal_symfony_validator_process_validation().
+   * _validators_process_validation().
    */
   public function testReturnArray() {
     $constraint = new \Symfony\Component\Validator\Constraints\IsNull();
     $correct_value = NULL;
     $incorrect_value = 'Not so null';
 
-    $violations = _drupal_symfony_validator_process_validation($correct_value, $constraint);
+    $violations = _validators_process_validation($correct_value, $constraint);
     $this->assertTrue(is_array($violations), 'When there are no violations, an array should be returned.');
     $this->assertTrue(count($violations) == 0, 'When there are no violations, the returned array should be empty.');
 
-    $violations = _drupal_symfony_validator_process_validation($incorrect_value, $constraint);
+    $violations = _validators_process_validation($incorrect_value, $constraint);
     $this->assertTrue(is_array($violations), 'When there are violations, an array should be returned.');
     $this->assertTrue(count($violations) > 0, 'When there are violations, the returned array should contain at least one element.');
 
@@ -213,7 +213,7 @@ class DrupalSymfonyValidatorTestFunctions extends DrupalUnitTestCase {
     if (!array_key_exists('options', $test)) {
       $test['options'] = array();
     }
-    $violations = drupal_symfony_validator_get_violations($test['constraint'], $test['value'], $test['options']);
+    $violations = validators_get_violations($test['constraint'], $test['value'], $test['options']);
     $this->assertTrue(is_array($violations), $test['msg']);
   }
 

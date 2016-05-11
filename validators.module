@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Symfony Validator for Drupal.
@@ -7,15 +8,15 @@
 /**
  * Implements hook_form_alter().
  */
-function drupal_symfony_validator_form_alter(&$form, &$form_state) {
-  $form['#validate'][] = 'drupal_symfony_validator_form_validate';
+function validators_form_alter(&$form, &$form_state) {
+  $form['#validate'][] = 'validators_form_validate';
 }
 
 /**
  * Implements hook_form_validate().
  */
-function drupal_symfony_validator_form_validate($form, &$form_state) {
-  module_load_include('inc', 'drupal_symfony_validator', 'drupal_symfony_validator.validator');
+function validators_form_validate($form, &$form_state) {
+  module_load_include('inc', 'validators', 'validators.validator');
   // Check if a validator has been set for every form element.
   foreach (element_children($form) as $element_key) {
     // Only execute the validator if a value has been set.
@@ -35,7 +36,7 @@ function drupal_symfony_validator_form_validate($form, &$form_state) {
           $validator = $validator_key;
           $options = is_array($validator_value) ? $validator_value : array();
         }
-        $violations = drupal_symfony_validator_get_violations($validator, $value, $options);
+        $violations = validators_get_violations($validator, $value, $options);
       }
       foreach ($violations as $violation) {
         form_set_error($element_key, check_plain($violation));
