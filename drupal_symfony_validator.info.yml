@@ -1,5 +1,0 @@
-name: Drupal Symfony Validator
-type: module
-description: 'Symfony (form) Validator for Drupal 8.'
-package: Symfony
-core: 8.x

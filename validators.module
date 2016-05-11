@@ -1,7 +1,8 @@
 <?php
+
 /**
  * @file
- * Symfony Validator for Drupal.
+ * Symfony Validators for Drupal.
  */
 
 use Drupal\Core\Form\FormStateInterface;
@@ -10,14 +11,14 @@ use Drupal\Core\Render\Element;
 /**
  * Implements hook_form_alter().
  */
-function drupal_symfony_validator_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  $form['#validate'][] = 'drupal_symfony_validator_form_validate';
+function validators_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['#validate'][] = 'validators_form_validate';
 }
 
 /**
  * Implements hook_form_validate().
  */
-function drupal_symfony_validator_form_validate($form, FormStateInterface $form_state) {
+function validators_form_validate($form, FormStateInterface $form_state) {
   // Check if a validator has been set for every form element.
   foreach (Element::children($form) as $element_key) {
     // Only execute the validator if a value has been set.
@@ -37,7 +38,7 @@ function drupal_symfony_validator_form_validate($form, FormStateInterface $form_
           $constraint = $constraint_key;
           $options = is_array($constraint_value) ? $constraint_value : array();
         }
-        $violations = \Drupal::service('drupal_symfony_validator.validator')->violations($constraint, $value, $options);
+        $violations = \Drupal::service('validators.validator')->violations($constraint, $value, $options);
       }
       foreach ($violations as $violation) {
         $form_state->setErrorByName($element_key, t($violation));

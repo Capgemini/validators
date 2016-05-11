@@ -1,3 +1,0 @@
-services:
-  drupal_symfony_validator.validator:
-    class: Drupal\drupal_symfony_validator\Validator

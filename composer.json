@@ -1,8 +1,8 @@
 {
-  "name": "drupal/drupal_symfony_validator",
-  "description": "Symfony (form) Validator for Drupal 8.",
+  "name": "drupal/validators",
+  "description": "Symfony (form) Validators for Drupal 8.",
   "type": "drupal-module",
-  "homepage": "https://drupal.org/project/drupal_symfony_validator",
+  "homepage": "https://drupal.org/project/validators",
   "authors": [
     {
       "name": "Levi Govaerts (legovaer)",
@@ -11,9 +11,9 @@
     }
   ],
   "support": {
-    "issues": "https://drupal.org/project/issues/drupal_symfony_validator",
+    "issues": "https://drupal.org/project/issues/validators",
     "irc": "irc://irc.freenode.org/drupal-contribute",
-    "source": "https://cgit.drupalcode.org/drupal_symfony_validator"
+    "source": "https://cgit.drupalcode.org/validators"
   },
   "license": "GPL-2.0+",
   "minimum-stability": "dev",

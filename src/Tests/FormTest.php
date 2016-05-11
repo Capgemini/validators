@@ -2,18 +2,18 @@
 
 /**
  * @file
- * Contains \Drupal\drupal_symfony_validator\Tests\FormTest.
+ * Contains \Drupal\validators\Tests\FormTest.
  */
 
-namespace Drupal\drupal_symfony_validator\Tests;
+namespace Drupal\validators\Tests;
 
 use Drupal\simpletest\WebTestBase;
 use Drupal\Core\Url;
 
 /**
- * Web testing class for Drupal Symfony Validator.
+ * Web testing class for Validators.
  *
- * @group drupal_symfony_validator
+ * @group validators
  */
 class FormTest extends WebTestBase {
 
@@ -34,14 +34,14 @@ class FormTest extends WebTestBase {
   /**
    * The modules to be loaded for these tests.
    */
-  public static $modules = ['drupal_symfony_validator', 'drupal_symfony_validator_test'];
+  public static $modules = ['validators', 'validators_test'];
 
   /**
    * {@inheritdoc}
    */
   public function setUp() {
     parent::setUp();
-    $this->formRoute = Url::fromRoute('drupal_symfony_validator_form_test');
+    $this->formRoute = Url::fromRoute('validator_form_test');
   }
 
   /**

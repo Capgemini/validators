@@ -1,9 +1,10 @@
-# Drupal Symfony Validator
+# Drupal Symfony Validators
 "Drupal Symfony Validator" allows you to use the Symfony Validator component
 inside your Drupal projects. The module allows you to extend your forms with
 an extra parameter called `#validators`. This validator is designed to validate
 forms against *constraints* (i.e. rules). An overview of these constraints can
-be found on the [official component page](http://symfony.com/doc/current/book/validation.html#constraints).
+be found on the [official component page]
+(http://symfony.com/doc/current/book/validation.html#constraints).
 
 ## Requirements
 PHP Version: 5.3.x or greater.
@@ -11,7 +12,8 @@ Dependencies: [Composer Manager](https://drupal.org/project/composer_manager)
 
 ## Basic example
 In the following example we will validate if the user filled in a valid e-mail
-address and a valid [ISBN number](https://en.wikipedia.org/wiki/International_Standard_Book_Number):
+address and a valid [ISBN number]
+(https://en.wikipedia.org/wiki/International_Standard_Book_Number):
 
 ```
 function mymodule_personal_details_form($form, &$form_state) {
@@ -30,8 +32,10 @@ function mymodule_personal_details_form($form, &$form_state) {
     '#validators' => array(
       'Isbn' => array(
         'message' => t(
-          'This value is an invalid bank account number. Please respect the <a href="@url">ISBN format</a>.',
-          array('@url' => 'https://en.wikipedia.org/wiki/International_Standard_Book_Number')
+          'This value is an invalid bank account number. Please respect the 
+           <a href="@url">ISBN format</a>.',
+          array('@url' => 
+          'https://en.wikipedia.org/wiki/International_Standard_Book_Number')
         ),
       )
     ),

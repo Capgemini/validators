@@ -1,10 +1,10 @@
 <?php
 /**
  * @file
- * Contains \Drupal\drupal_symfony_validator_test\Form\TestForm.
+ * Contains \Drupal\validators_test\Form\TestForm.
  */
 
-namespace Drupal\drupal_symfony_validator_test\Form;
+namespace Drupal\validators_test\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -17,7 +17,7 @@ class TestForm extends FormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'drupal_symfony_validator_test_form';
+    return 'validators_test_form';
   }
 
   /**
