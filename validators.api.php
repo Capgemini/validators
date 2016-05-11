@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Documentation for Drupal Symfony Validator API.
+ * Documentation for the Validators API.
  */
 
 /**
@@ -13,10 +13,9 @@
 /**
  * Introduce a custom validator assertion.
  *
- * Drupal Symfony Validator ships with a lot of out-of-the box assertions. Some
+ * Validators ships with a lot of out-of-the box assertions. Some
  * modules require more advanced assertions to be validated against. This hook
- * allows a module to introduce a custom assertion to the the Drupal Symfony
- * Validator module.
+ * allows a module to introduce a custom assertion to the the Validators module.
  *
  * @param string $constraint
  *   The constraint that is used inside the '#validator' parameter of the form
