@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains \Drupal\Tests\validator\Unit\TestConstraints.
+ * Contains \Drupal\Tests\validators\Unit\TestConstraints.
  */
 
-namespace Drupal\Tests\validator\Unit;
+namespace Drupal\Tests\validators\Unit;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\validators\ValidatorsManager;
@@ -29,7 +29,7 @@ class TestConstraints extends UnitTestCase {
    */
   public function setUp() {
     $container = new ContainerBuilder();
-    $validator = $this->getMockBuilder('\Drupal\validator\Validator')
+    $validator = $this->getMockBuilder('\Drupal\validators\ValidatorsManager')
       ->disableOriginalConstructor()
       ->getMock();
     $validator
