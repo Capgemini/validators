@@ -1,4 +1,7 @@
 # Validators
+[![Build Status](https://travis-ci.org/Capgemini/validators.svg?branch=7.x-1.x)]
+(https://travis-ci.org/Capgemini/validators)
+
 "Validators" allows you to use the Symfony Validator component
 inside your Drupal projects. The module allows you to extend your forms with
 an extra parameter called `#validators`. This validator is designed to validate
