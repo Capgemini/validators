@@ -5,6 +5,8 @@
  * Tests for validators.module.
  */
 
+module_load_include('inc', 'validators', 'validators.validator');
+
 /**
  * Unit testing class for Drupal Symfony Validator.
  */
@@ -26,7 +28,7 @@ class ValidatorsTestFunctions extends DrupalUnitTestCase {
    */
   public function testNonExistingConstraint() {
     $violations = validators_get_violations('NonExistingConstraint', 'string');
-    $this->assertNull($violations, 'Validating against a non-existing constraint should return NULL.');
+    $this->assertEqual(array(), $violations, 'Validating against a non-existing constraint should return an empty array.');
   }
 
   /**
